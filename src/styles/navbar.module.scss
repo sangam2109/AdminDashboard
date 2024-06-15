@@ -1,0 +1,8 @@
+/* app/components/Navbar/navbar.module.css */
+.appBar {
+  z-index: 1201; /* Higher than the sidebar */
+}
+
+.title {
+  flex-grow: 1;
+}

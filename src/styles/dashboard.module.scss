@@ -1,0 +1,84 @@
+.pageHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    
+    .pageTitle {
+        display: flex;
+        align-items: center;
+        color: #3f51b5;
+        margin-left: 10px;
+    }
+
+    .iconButton {
+        background-color: #3f51b5;
+        color: white;
+        margin-right: 8px;
+        border-radius: 50%;
+        padding: 8px;
+    }
+
+    .breadcrumbItem {
+        display: flex;
+        align-items: center;
+        color: #3f51b5;
+
+        .icon {
+            margin-left: 4px;
+            color: #3f51b5;
+        }
+    }
+
+    .grid {
+        margin-top: 20px;
+    }
+
+    .card {
+        position: relative;
+        overflow: hidden;
+        color: white;
+
+        &.bgGradientDanger {
+            background: linear-gradient(45deg, #ff1744, #ff8a80);
+        }
+
+        &.bgGradientInfo {
+            background: linear-gradient(45deg, #1e88e5, #6ab7ff);
+        }
+
+        &.bgGradientSuccess {
+            background: linear-gradient(45deg, #00e676, #69f0ae);
+        }
+    }
+
+    .cardContent {
+        position: relative;
+        z-index: 1;
+    }
+
+    .cardImgAbsolute {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100px;
+        height: 100px;
+        opacity: 0.3;
+    }
+
+    .fontWeightNormal {
+        font-weight: normal;
+        margin-bottom: 16px;
+    }
+
+    .mb5 {
+        margin-bottom: 16px;
+    }
+
+    .cardText {
+        font-size: 0.875rem;
+    }
+
+    .floatRight {
+        float: right;
+    }
+}

@@ -1,0 +1,48 @@
+// dashboardTable.scss
+
+.table {
+    min-width: 650px; // Adjust as per your layout needs
+    margin-top: 20px; // Example margin, adjust as needed
+}
+
+.card {
+    border: 1px solid #ebedf2; // Example border color, adjust as needed
+}
+
+.card-body {
+    padding: 20px; // Example padding, adjust as needed
+}
+
+.card-title {
+    margin-bottom: 20px; // Example margin, adjust as needed
+}
+
+.badge {
+    padding: 5px 10px; // Example padding, adjust as needed
+    border-radius: 4px; // Example border radius, adjust as needed
+    font-size: 0.875rem; // Example font size, adjust as needed
+}
+
+.badge-gradient-success {
+    background-color: #28a745; // Example background color, adjust as needed
+    color: white; // Example text color, adjust as needed
+}
+
+.badge-gradient-warning {
+    background-color: #ffc107; // Example background color, adjust as needed
+    color: black; // Example text color, adjust as needed
+}
+
+.badge-gradient-info {
+    background-color: #17a2b8; // Example background color, adjust as needed
+    color: white; // Example text color, adjust as needed
+}
+
+.badge-gradient-danger {
+    background-color: #dc3545; // Example background color, adjust as needed
+    color: white; // Example text color, adjust as needed
+}
+
+.mr-2 {
+    margin-right: 0.5rem; // Example margin, adjust as needed
+}

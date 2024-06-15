@@ -1,0 +1,52 @@
+/* app/components/SideBar/sidebar.module.scss */
+.sidebar {
+  width: 240px;
+  height: 100vh;
+  background-color: #3f51b5;
+  color: white;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  .navProfile {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    .avatar {
+      margin-right: 16px;
+    }
+    .navProfileText {
+      display: flex;
+      flex-direction: column;
+      .name {
+        font-weight: bold;
+      }
+      .role {
+        font-size: 0.875rem;
+        color: rgba(255, 255, 255, 0.7);
+      }
+    }
+  }
+  .menuTitle {
+    font-size: 0.875rem;
+  }
+  .menuItem {
+    display: flex;
+    align-items: center;
+    padding: 10px 16px;
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    .menuIcon {
+      margin-right: 16px;
+    }
+  }
+  .subMenu {
+    padding-left: 32px;
+    .subMenuItem {
+      padding: 8px 16px;
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+    }
+  }
+}
