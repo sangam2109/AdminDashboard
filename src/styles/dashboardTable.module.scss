@@ -1,48 +1,89 @@
-// dashboardTable.scss
+
 
 .table {
-    min-width: 650px; // Adjust as per your layout needs
-    margin-top: 20px; // Example margin, adjust as needed
+  min-width: 650px; // Adjust as per your layout needs
+  margin-top: 20px; // Example margin, adjust as needed
+  font-family: var(--font-family);
+  border-collapse: collapse;
+  
+  .heading th {
+    border-top: 0;
+    border-bottom-width: 1px;
+    font-family: var(--font-family);
+    font-weight: initial;
+    text-align: center;
+    font-weight: bold;
+    padding-right: 60px;
+  }
+  
+  td {
+    padding: 20px; // Added padding for spacing
+    padding-right: 90px;
+    border-bottom: 1px solid var(--border-color);
+    font-family: var(--font-family);
+    text-align: center;
+  }
 }
 
 .card {
-    border: 1px solid #ebedf2; // Example border color, adjust as needed
+  border-radius: 0.5rem;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
+  border: 0;
+  background: var(--white);
 }
 
-.card-body {
-    padding: 20px; // Example padding, adjust as needed
+.cardBody {
+  padding: 20px; // Example padding, adjust as needed
 }
 
-.card-title {
-    margin-bottom: 20px; // Example margin, adjust as needed
+.cardTitle {
+  color: var(--body-color);
+  margin-bottom: 0.75rem;
+  text-transform: capitalize;
+  font-family: var(--font-family);
+  font-size: 1.125rem;
+  margin-left: 20px;
 }
 
 .badge {
-    padding: 5px 10px; // Example padding, adjust as needed
-    border-radius: 4px; // Example border radius, adjust as needed
-    font-size: 0.875rem; // Example font size, adjust as needed
+  padding: 5px 10px; // Example padding, adjust as needed
+  border-radius: 4px; // Example border radius, adjust as needed
+  font-size: 0.875rem; // Example font size, adjust as needed
 }
 
-.badge-gradient-success {
-    background-color: #28a745; // Example background color, adjust as needed
-    color: white; // Example text color, adjust as needed
+.Imagealign {
+  display: flex;
+  align-items: center;
+  gap: 10px; // Adjust the gap as needed
 }
 
-.badge-gradient-warning {
-    background-color: #ffc107; // Example background color, adjust as needed
-    color: black; // Example text color, adjust as needed
+.img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
 }
 
-.badge-gradient-info {
-    background-color: #17a2b8; // Example background color, adjust as needed
-    color: white; // Example text color, adjust as needed
+.badgeGradientSuccess {
+  background-color: var(--success-color); // Example background color, adjust as needed
+  color: var(--white); // Example text color, adjust as needed
 }
 
-.badge-gradient-danger {
-    background-color: #dc3545; // Example background color, adjust as needed
-    color: white; // Example text color, adjust as needed
+.badgeGradientWarning {
+  background-color: var(--warning-color); // Example background color, adjust as needed
+  color: var(--dark-color); // Example text color, adjust as needed
 }
 
-.mr-2 {
-    margin-right: 0.5rem; // Example margin, adjust as needed
+.badgeGradientInfo {
+  background-color: var(--info-color); // Example background color, adjust as needed
+  color: var(--white); // Example text color, adjust as needed
+}
+
+.badgeGradientDanger {
+  background-color: var(--danger-color); // Example background color, adjust as needed
+  color: var(--white); // Example text color, adjust as needed
+}
+
+.mr2 {
+  margin-right: 0.5rem; // Example margin, adjust as needed
 }

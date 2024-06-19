@@ -1,8 +1,78 @@
-/* app/components/Navbar/navbar.module.css */
-.appBar {
-  z-index: 1201; /* Higher than the sidebar */
+.navbar{
+  padding: 0.325rem;
 }
 
-.title {
-  flex-grow: 1;
+.img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.ProfileIcon{
+  margin-right: 10px;
+}
+.ProfileName{
+  font-size: 18px;
+   font-family: var(--font-family);
+   
+}
+.searchField {
+  display: none;
+  @media (min-width: 768px) {
+    display: block;
+  }
+
+  .form {
+    display: flex;
+    align-items: center;
+    height: 100%;
+
+    .inputGroup {
+      display: flex;
+      align-items: center;
+
+      .inputGroupPrepend {
+        background-color: transparent;
+        display: flex;
+        align-items: center;
+
+        .inputGroupText {
+          border: none;
+          color: #c9c8c8; // Or your desired color
+        }
+      }
+
+      .formControl {
+        background-color: transparent;
+        border: none;
+      }
+    }
+  }
+}
+
+.menuList{
+  margin-top: 20px;
+}
+.availabilityStatus{
+      position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    border: 2px solid #ffffff;
+    bottom: 14px;
+    right: 155px;
+      
+}
+.online{
+background: #1bcfb4;
+}
+.LogoutIcon{
+  color: var(--primary-color);
+}
+.IconStyle{
+  gap: 10px;
+}
+.Menu{
+  margin-top: 45px;
+  left: 10px;
 }

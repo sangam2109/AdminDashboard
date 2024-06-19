@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Doughnut, Bar } from "react-chartjs-2";
 import { Grid, Typography } from "@mui/material";
-import "../../styles/dashboardCharts.module.scss"; // Adjust path as necessary
+import styles from "../../styles/dashboardCharts.module.scss"; // Adjust path as necessary
 import { Chart, registerables } from "chart.js"; 
+import { AspectRatio } from "@mui/icons-material";
 Chart.register(...registerables);
 const DashboardCharts: React.FC = () => {
   const [visitSaleData, setVisitSaleData] = useState<any>({});
@@ -54,6 +55,7 @@ const DashboardCharts: React.FC = () => {
   const [trafficData, setTrafficData] = useState<any>({});
   const [trafficOptions] = useState<any>({
     responsive: true,
+    aspectRatio:2,
     animation: {
       animateScale: true,
       animateRotate: true,
@@ -131,25 +133,32 @@ const DashboardCharts: React.FC = () => {
   }, []);
 
   return (
-    <Grid container spacing={3}>
+    <Grid container spacing={3} >
       <Grid item xs={12} md={7}>
         {visitSaleData && visitSaleData.datasets && (
-          <div className="card">
-            <div className="card-body">
-              <div className="clearfix mb-4">
-                <Typography variant="h4" className="card-title float-left">
+          <div className={styles.card}>
+            <div className={styles.cardBody}>
+              <div className={styles.clearfix }>
+                <Typography
+                  variant="h4"
+                  className={` ${styles.cardTitle}  ${styles.floatLeft}`}
+                >
                   Visit And Sales Statistics
                 </Typography>
                 <div
                   id="visit-sale-chart-legend"
-                  className="rounded-legend legend-horizontal legend-top-right float-right"
+                  className={`${styles.roundedLegend} ${styles.legendHorizontal} ${styles.legendTopRight} ${styles.floatRight}`}
                 >
-                  <ul>
+                  <ul className={
+                    styles.align
+                  }>
                     {visitSaleData.datasets.map(
                       (dataset: any, index: number) => (
                         <li key={index}>
                           <span
-                            className={`legend-dots bg-${dataset.label.toLowerCase()}`}
+                            className={`${
+                              styles.legendDots
+                            } bg-${dataset.label.toLowerCase()}`}
                           >
                             {dataset.label}
                           </span>
@@ -171,23 +180,27 @@ const DashboardCharts: React.FC = () => {
       </Grid>
       <Grid item xs={12} md={5}>
         {trafficData && trafficData.datasets && (
-          <div className="card">
-            <div className="card-body">
-              <Typography variant="h4" className="card-title">
+          <div className={styles.card}>
+            <div className={styles.cardBody}>
+              <Typography variant="h4" className={styles.cardTitle}>
                 Traffic Sources
               </Typography>
-              <Doughnut data={trafficData} options={trafficOptions} />
+              <Doughnut data={trafficData} options={trafficOptions}  />
               <div
                 id="traffic-chart-legend"
-                className="rounded-legend legend-vertical legend-bottom-left pt-4"
+                className={`${styles.roundedLegend} ${styles.legendVertical} ${
+                  styles.legendBottomLeft
+                } `}
               >
                 <ul>
                   {trafficData.labels.map((label: string, index: number) => (
                     <li key={index}>
-                      <span className={`legend-dots bg-${label.toLowerCase()}`}>
+                      <span
+                        className={styles.legendDots} 
+                      >
                         {label}
                       </span>
-                      <span className="float-right">
+                      <span className={styles.floatRight}>
                         {trafficData.datasets[0].data[index]}%
                       </span>
                     </li>

@@ -1,84 +1,205 @@
 .pageHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  .aligning {
     display: flex;
-    flex-direction: column;
-    gap: 20px;
-    
-    .pageTitle {
-        display: flex;
-        align-items: center;
-        color: #3f51b5;
-        margin-left: 10px;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    margin-top: 1.5rem;
+    padding: 1rem;
+  }
+  .pageTitle {
+    display: flex;
+    align-items: center;
+    color: black;
+    margin-left: 10px;
+font-weight: 600;
+  }
+
+  .iconButton {
+      display: flex;
+    width: 36px;
+    color: white;
+    height: 36px;
+    border-radius: 4px;
+    text-align: center;
+    padding: auto;
+    background-color: var(--primary-color);
+    // -webkit-box-shadow: 0px 3px 8.3px 0.7px rgba(163, 93, 255, 0.35);
+    box-shadow: 0px 3px 8.3px 0.7px rgba(163, 93, 255, 0.35);
+  }
+
+  .breadcrumbItem {
+    display: flex;
+    align-items: center;
+    color: black;
+
+    .icon {
+      margin-left: 4px;
+      color: var(--primary-color);
+    }
+  }
+
+  .grid {
+    margin-bottom: 1rem;
+  }
+
+  .card {
+    position: relative;
+    overflow: hidden;
+    color: white;
+    padding: 2.5rem 2.5rem;
+
+    &.bgGradientDanger {
+      background: linear-gradient(45deg, #ff1744, #ff8a80);
     }
 
-    .iconButton {
-        background-color: #3f51b5;
-        color: white;
-        margin-right: 8px;
-        border-radius: 50%;
-        padding: 8px;
+    &.bgGradientInfo {
+      background: linear-gradient(45deg, #1e88e5, #6ab7ff);
     }
 
-    .breadcrumbItem {
-        display: flex;
-        align-items: center;
-        color: #3f51b5;
-
-        .icon {
-            margin-left: 4px;
-            color: #3f51b5;
-        }
+    &.bgGradientSuccess {
+      background: linear-gradient(45deg, #00e676, #69f0ae);
     }
+  }
 
-    .grid {
-        margin-top: 20px;
-    }
+  .cardContent {
+    position: relative;
+    z-index: 1;
+  }
 
-    .card {
-        position: relative;
-        overflow: hidden;
-        color: white;
+  .cardImgAbsolute {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100px;
+    height: 100px;
+    opacity: 0.3;
+  }
 
-        &.bgGradientDanger {
-            background: linear-gradient(45deg, #ff1744, #ff8a80);
-        }
+  .fontWeightNormal {
+    font-weight: normal;
+    margin-bottom: 16px;
+  }
 
-        &.bgGradientInfo {
-            background: linear-gradient(45deg, #1e88e5, #6ab7ff);
-        }
+  .mb5 {
+    margin-bottom: 16px;
+  }
 
-        &.bgGradientSuccess {
-            background: linear-gradient(45deg, #00e676, #69f0ae);
-        }
-    }
+  .cardText {
+    font-size: 0.875rem;
+  }
 
-    .cardContent {
-        position: relative;
-        z-index: 1;
-    }
+  .floatRight {
+    float: right;
+  }
+  .chart {
+    margin-bottom: 1rem;
+    max-height: fit-content;
+  }
 
-    .cardImgAbsolute {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 100px;
-        height: 100px;
-        opacity: 0.3;
-    }
+  .todoForm {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    // margin-bottom: 10px;
+  }
 
-    .fontWeightNormal {
-        font-weight: normal;
-        margin-bottom: 16px;
-    }
-
-    .mb5 {
-        margin-bottom: 16px;
-    }
-
-    .cardText {
-        font-size: 0.875rem;
-    }
-
-    .floatRight {
-        float: right;
-    }
+  .todoInput {
+    margin-right: 10px;
+    width: 350px;
+    margin-right: 20px;
+  }
+.completedTask {
+  text-decoration: line-through; /* Add a strikethrough effect */
+  text-decoration-color: blue;
 }
+  .todoButton {
+    height: 40px;
+    background: linear-gradient(to right, #da8cff, #9a55ff);
+    color: white;
+    padding-inline: 40px;
+    padding-block: px;
+  }
+.completedRemoveIcon{
+ color: #b66dff;
+}
+
+  .todoItem {
+    display: flex;
+    font-size: 14px;
+    align-items: center;
+    justify-content: space-between;
+  }
+.checkbox {
+  width: 18px;
+  height: 18px;
+  border-radius: 2px;
+  color: #b66dff;
+  margin-right: 20px;
+
+  &.Mui-checked {
+    background-color:     #b66dff;; /* Change background color when checked */
+      
+  }
+}
+
+  .customLinearProgress {
+    height: 8px;
+    width: 150px;
+    background-color: #e9ecef; // Background color
+    border-radius: 5px;
+    
+.badgeGradientSuccess {
+    background: linear-gradient(to right, #84d9d2, #07cdae); /* Adjusted background syntax */
+    color: white;
+}
+
+.badgeGradientWarning {
+    background: linear-gradient(to right, #f6e384, #ffd500);
+    color: black;
+}
+
+.badgeGradientInfo {
+    background: linear-gradient(to right, #90caf9, #047edf 99%);
+    color: white;
+}
+
+.badgeGradientDanger {
+    background: linear-gradient(to right, #ffbf96, #fe7096);
+    color: white;
+}
+
+.badgeGradientPrimary {
+    background: linear-gradient(to right, #da8cff, #9a55ff);
+    color: white;
+}
+
+  }
+ 
+  
+}
+ .table {
+    min-width: 650px; // Adjust as per your layout needs
+    margin-top: 20px; // Example margin, adjust as needed
+    font-family: "ubuntu-medium", sans-serif;
+    border-collapse: collapse;
+
+    thead th {
+      border-top: 0;
+      border-bottom-width: 1px;
+      font-weight: initial;
+      text-align: center;
+      font-weight: bold;
+      padding-inline: 0px;
+    }
+
+    td {
+    
+      padding: 16px; // Added padding for spacing
+      padding-inline: 40px;
+      border-bottom: 1px solid #ddd;
+      text-align: center;
+    }
+  }

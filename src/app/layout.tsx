@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { ThemeProvider } from "@mui/material/styles";
-// import theme from "../theme";
-import "../styles/globals.scss";
+import theme from "../theme";
+import  "../styles/global.scss";
+import MiniDrawer from "@/components/Navbar/navbar";
+import { Box } from "@mui/material";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,13 +19,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <AppRouterCacheProvider options={{ key: "sass" }}>
-          {children}
-          {/* <ThemeProvider theme={theme}></ThemeProvider> */}
+        <AppRouterCacheProvider options={{ key: "scss" }}>
+          <ThemeProvider theme={theme}>
+            <Box
+              display={"flex"}
+              sx={{ paddingY: "100px", paddingX: 3 }}
+            >
+              <MiniDrawer />
+              {children}
+            </Box>
+          </ThemeProvider>
         </AppRouterCacheProvider>
       </body>
     </html>
   );
 }
-
-

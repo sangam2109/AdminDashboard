@@ -1,89 +1,61 @@
+
+
 .card {
-    border-radius: 0.5rem;
-    background-color: #ffffff;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    margin-bottom: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
+  border: 0;
+  height: 450px;
+  background: var(--white); /* Use variable for background color */
+  
+  .cardBody {
+    padding: 1.25rem;
+    height: fit-content;
+  }
 
-    .card-body {
-        padding: 1.25rem;
+  .cardTitle {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .clearfix {
+    width: 100%;
+    justify-content: center;
+    &::after {
+      content: "";
+      display: table;
+      clear: both;
     }
+  }
 
-    .card-title {
-        font-size: 1.25rem;
-        font-weight: 600;
-        margin-bottom: 1rem;
-    }
+  .floatLeft {
+    float: left;
+  }
 
-    .clearfix::after {
-        content: "";
-        display: table;
-        clear: both;
-    }
+  .floatRight {
+    float: right;
+  }
 
-    .float-left {
-        float: left;
-    }
+  .align {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+  }
 
-    .float-right {
-        float: right;
-    }
+  li {
+    display: inline-block;
+    margin-right: 1.5rem;
+    list-style-type: none;
+    color: var(--text-muted); /* Use variable for text color */
+    font-size: 0.75rem;
+  }
 
-    .legend-horizontal {
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-end;
-        align-items: center;
-    }
-
-    .legend-vertical {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
-    }
-
-    .rounded-legend {
-        border-radius: 0.25rem;
-        padding: 0.5rem;
-        background-color: #f1f5f8;
-        margin-left: 1rem;
-
-        ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        li {
-            margin-bottom: 0.5rem;
-        }
-
-        .legend-dots {
-            width: 1rem;
-            height: 1rem;
-            display: inline-block;
-            margin-right: 0.5rem;
-            border-radius: 50%;
-        }
-
-        .bg-primary {
-            background-color: #667eea;
-        }
-
-        .bg-danger {
-            background-color: #f47066;
-        }
-
-        .bg-info {
-            background-color: #4e73df;
-        }
-
-        .bg-success {
-            background-color: #1cc88a;
-        }
-    }
-
-    .chartLegendContainer {
-        position: relative;
-    }
+  .legendDots {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 100%;
+    vertical-align: text-bottom;
+    margin-right: 0.5rem;
+  }
 }

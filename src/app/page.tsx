@@ -4,11 +4,7 @@ import Dashboard from "@/components/Dashboard/dashboard";
 export default function Home() {
   return (
     <main>
-      {/* <Sidebar />
-      <div>
-        <ChartJs/>
-      </div> */}
-      <Dashboard/>
+      <Dashboard />
     </main>
   );
 }
