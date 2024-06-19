@@ -405,7 +405,11 @@ const MiniDrawer: React.FC = () => {
         <List>
           {MenuItems.map((item) => (
             <React.Fragment key={item.title}>
-              <ListItem disablePadding sx={{ display: "block" }} className={styles.menuList}>
+              <ListItem
+                disablePadding
+                sx={{ display: "block" }}
+                className={styles.menuList}
+              >
                 <ListItemButton
                   sx={{
                     minHeight: 48,
@@ -427,7 +431,6 @@ const MiniDrawer: React.FC = () => {
                   >
                     {item.icon}
                   </ListItemIcon>
-
                 </ListItemButton>
                 {item.subMenu && (
                   <Collapse
@@ -448,8 +451,8 @@ const MiniDrawer: React.FC = () => {
                               justifyContent: open ? "initial" : "center",
                               px: 4,
                             }}
-                            component={Link}
-                            to={subItem.path}
+                            component="a"
+                            href={subItem.path}
                           >
                             <ListItemText
                               primary={subItem.title}
