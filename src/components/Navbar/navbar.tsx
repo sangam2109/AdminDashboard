@@ -1,7 +1,13 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
-import { styled, useTheme, Theme, CSSObject, alpha } from "@mui/material/styles";
+import React, { useState, useEffect } from "react";
+import {
+  styled,
+  useTheme,
+  Theme,
+  CSSObject,
+  alpha,
+} from "@mui/material/styles";
 import {
   AppBarProps as MuiAppBarProps,
   AppBar as MuiAppBar,
@@ -14,19 +20,20 @@ import {
   ListItem,
   Menu,
   ListItemButton,
+  ListItemAvatar,
   ListItemIcon,
   ListItemText,
   Toolbar,
   Typography,
   Collapse,
-  MenuItem
+  MenuItem,
 } from "@mui/material";
 import { Avatar } from "@mui/material";
 import { Trans } from "react-i18next";
 import Badge from "@mui/material/Badge";
 import CropFreeIcon from "@mui/icons-material/CropFree";
-import { Cached, Logout } from "@mui/icons-material";
-import face1 from "../../assets/images/faces/face1.jpg"
+import { Cached, ImageAspectRatioOutlined, Logout } from "@mui/icons-material";
+import face1 from "../../assets/images/faces/face1.jpg";
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import {
@@ -38,6 +45,7 @@ import {
   Inbox as InboxIcon,
   ExpandLess,
   ExpandMore,
+  Settings 
 } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -46,14 +54,16 @@ import styles from "../../styles/navbar.module.scss";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 import FormatLineSpacingIcon from "@mui/icons-material/FormatLineSpacing";
-
+import Image from "next/image";
 import BasicUiIcon from "@mui/icons-material/GpsFixedSharp";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import TableIcon from "@mui/icons-material/BackupTableSharp";
 import ContactsIcon from "@mui/icons-material/Contacts";
 import ChartBarIcon from "@mui/icons-material/Addchart";
 import MedicalBagIcon from "@mui/icons-material/MedicalServices";
-
+import face2 from "../../assets/images/faces/face2.jpg";
+import face3 from "../../assets/images/faces/face3.jpg";
+import face4 from "../../assets/images/faces/face4.jpg";
 const drawerWidth = 240;
 
 const openedMixin = (theme: Theme): CSSObject => ({
@@ -77,10 +87,10 @@ const closedMixin = (theme: Theme): CSSObject => ({
   },
 });
 
-const DrawerHeader = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'flex-end',
+const DrawerHeader = styled("div")(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "flex-end",
   padding: theme.spacing(0, 1),
   ...theme.mixins.toolbar,
 }));
@@ -90,17 +100,15 @@ interface AppBarProps extends MuiAppBarProps {
 }
 
 const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== 'open',
+  shouldForwardProp: (prop) => prop !== "open",
 })<AppBarProps>(({ theme, open }) => ({
   zIndex: theme.zIndex.drawer + 1,
-  transition: theme.transitions.create(['width', 'margin'], {
+  transition: theme.transitions.create(["width", "margin"], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
   ...(open && {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
+    transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
@@ -108,19 +116,19 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 const Drawer = styled(MuiDrawer, {
-  shouldForwardProp: (prop) => prop !== 'open',
+  shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
   width: drawerWidth,
   flexShrink: 0,
-  whiteSpace: 'nowrap',
-  boxSizing: 'border-box',
+  whiteSpace: "nowrap",
+  boxSizing: "border-box",
   ...(open && {
     ...openedMixin(theme),
-    '& .MuiDrawer-paper': openedMixin(theme),
+    "& .MuiDrawer-paper": openedMixin(theme),
   }),
   ...(!open && {
     ...closedMixin(theme),
-    '& .MuiDrawer-paper': closedMixin(theme),
+    "& .MuiDrawer-paper": closedMixin(theme),
   }),
 }));
 
@@ -172,8 +180,8 @@ const MenuItems = [
     icon: <MedicalBagIcon />,
     path: "/sample-pages",
     subMenu: [
-      { title: "Login", path: "/user-pages/login-1" },
-      { title: "Register", path: "/user-pages/register-1" },
+      { title: "Login", path: "/user-pages/login" },
+      { title: "Register", path: "/user-pages/register" },
       { title: "404", path: "/error-pages/error-404" },
       { title: "500", path: "/error-pages/error-500" },
       { title: "Blank Page", path: "/general-pages/blank-page" },
@@ -191,7 +199,15 @@ const MiniDrawer: React.FC = () => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   const [menuState, setMenuState] = useState<{ [key: string]: boolean }>({});
-    const [isExpanded, setIsExpanded] = React.useState(false);
+  const [isExpanded, setIsExpanded] = React.useState(false);
+  const [anchorElProfile, setAnchorElProfile] = useState<null | HTMLElement>(
+    null
+  );
+  const [anchorElMessages, setAnchorElMessages] = useState<null | HTMLElement>(
+    null
+  );
+  const [anchorElNotification, setAnchorElNotification] =
+    useState<null | HTMLElement>(null);
 
   const handleExpandClick = () => {
     if (isExpanded) {
@@ -201,19 +217,25 @@ const MiniDrawer: React.FC = () => {
     }
     setIsExpanded(!isExpanded);
   };
+  const handleClick = (title: string) => {
+    setMenuState({ ...menuState, [title]: !menuState[title] });
+  };
+
+  const handleSubItemClick = (path: string) => {
+    router.push(path);
+  };
+
   const router = useRouter();
 
   const handleDrawerOpen = () => {
-    setOpen(true);
+    setOpen((open)=>!open)
   };
 
   const handleDrawerClose = () => {
     setOpen(false);
   };
 
-  const handleClick = (title: string) => {
-    setMenuState({ ...menuState, [title]: !menuState[title] });
-  };
+
 
   useEffect(() => {
     // Reset menu state on route change
@@ -221,20 +243,33 @@ const MiniDrawer: React.FC = () => {
   }, [router]);
 
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
+    setAnchorElProfile(event.currentTarget);
   };
 
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
-    React.useState<null | HTMLElement>(null);
-
-  const isMenuOpen = Boolean(anchorEl);
-  const handleMenuClose = () => {
-    setAnchorEl(null);
+  const handleMessagesMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElMessages(event.currentTarget);
+  };
+  const handleNotificationMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElNotification(event.currentTarget);
+  };
+  const handleProfileMenuClose = () => {
+    setAnchorElProfile(null);
   };
 
-  const menuId = "primary-search-account-menu";
-  
+  const handleMessagesMenuClose = () => {
+    setAnchorElMessages(null);
+  };
+   const handleNotificationMenuClose = () => {
+     setAnchorElNotification(null);
+   };
+
+  const isProfileMenuOpen = Boolean(anchorElProfile);
+  const isMessagesMenuOpen = Boolean(anchorElMessages);
+  const isNotificationMenuOpen=Boolean(anchorElNotification)
+
+  const menuIdProfile = "primary-search-account-menu";
+  const menuIdMessages = "messages-menu";
+
   return (
     <>
       <CssBaseline />
@@ -250,10 +285,6 @@ const MiniDrawer: React.FC = () => {
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
-            sx={{
-              marginRight: 5,
-              ...(open && { display: "none" }),
-            }}
           >
             <MenuIcon />
           </IconButton>
@@ -282,7 +313,7 @@ const MiniDrawer: React.FC = () => {
                 size="large"
                 edge="end"
                 aria-label="account of current user"
-                aria-controls={menuId}
+                aria-controls={menuIdProfile}
                 aria-haspopup="true"
                 onClick={handleProfileMenuOpen}
                 color="inherit"
@@ -301,23 +332,23 @@ const MiniDrawer: React.FC = () => {
                 <KeyboardArrowDownIcon />
               </IconButton>
               <Menu
-                anchorEl={anchorEl}
+                anchorEl={anchorElProfile}
                 anchorOrigin={{
                   vertical: "top",
                   horizontal: "right",
                 }}
-                id={menuId}
+                id={menuIdProfile}
                 keepMounted
                 transformOrigin={{
                   vertical: "top",
                   horizontal: "right",
                 }}
-                open={isMenuOpen}
-                onClose={handleMenuClose}
+                open={isProfileMenuOpen}
+                onClose={handleProfileMenuClose}
                 className={styles.Menu}
               >
                 <MenuItem
-                  onClick={handleMenuClose}
+                  onClick={handleProfileMenuClose}
                   className={styles.IconStyle}
                 >
                   <Cached fontSize="small" color="success" />
@@ -326,7 +357,7 @@ const MiniDrawer: React.FC = () => {
                   </Typography>
                 </MenuItem>
                 <MenuItem
-                  onClick={handleMenuClose}
+                  onClick={handleProfileMenuClose}
                   className={styles.IconStyle}
                 >
                   <Logout fontSize="small" className={styles.LogoutIcon} />
@@ -350,9 +381,10 @@ const MiniDrawer: React.FC = () => {
               size="small"
               aria-label="show 4 new mails"
               color="inherit"
+              onClick={handleMessagesMenuOpen}
             >
               <Badge
-                badgeContent={""}
+                badgeContent={4}
                 color="success"
                 sx={{
                   "& .MuiBadge-badge": {
@@ -366,10 +398,59 @@ const MiniDrawer: React.FC = () => {
                 <MailIcon fontSize="small" />
               </Badge>
             </IconButton>
+            <Menu
+              anchorEl={anchorElMessages}
+              open={isMessagesMenuOpen}
+              onClose={handleMessagesMenuClose}
+            >
+              <Typography className={styles.headingText}>Messages</Typography>
+
+              <Divider />
+              <MenuItem
+                onClick={handleMessagesMenuClose}
+                className={styles.MenuItem}
+              >
+                <Image src={face4} alt="user" className={styles.img} />
+                <ListItemText
+                  primary={<Trans>Mark send you a message</Trans>}
+                  secondary="1 Minutes ago"
+                />
+              </MenuItem>
+              <Divider />
+              <MenuItem
+                onClick={handleMessagesMenuClose}
+                className={styles.MenuItem}
+              >
+                <Image src={face2} alt="user" className={styles.img} />
+                <ListItemText
+                  primary={<Trans>Cregh send you a message</Trans>}
+                  secondary="15 Minutes ago"
+                />
+              </MenuItem>
+              <Divider />
+              <MenuItem
+                onClick={handleMessagesMenuClose}
+                className={styles.MenuItem}
+              >
+                <Image src={face3} alt="user" className={styles.img} />
+                <ListItemText
+                  primary={<Trans>Profile picture updated</Trans>}
+                  secondary="18 Minutes ago"
+                />
+              </MenuItem>
+              <Divider />
+
+              <Typography className={` ${styles.cursorPointer}`}>
+                {" "}
+                4 new messages
+              </Typography>
+            </Menu>
+
             <IconButton
               size="large"
               aria-label="show 17 new notifications"
               color="inherit"
+              onClick={handleNotificationMenuOpen}
             >
               <Badge
                 badgeContent={""}
@@ -386,6 +467,55 @@ const MiniDrawer: React.FC = () => {
                 <NotificationsIcon fontSize="small" />
               </Badge>
             </IconButton>
+            <Menu
+              anchorEl={anchorElNotification}
+              open={isNotificationMenuOpen}
+              onClose={handleNotificationMenuClose}
+            >
+              <Typography className={styles.headingText}>
+                Notifications
+              </Typography>
+
+              <Divider />
+              <MenuItem
+                onClick={handleNotificationMenuClose}
+                className={styles.MenuItem}
+              >
+                <Image src={face4} alt="user" className={styles.img} />
+                <ListItemText
+                  primary={<Trans>Event today</Trans>}
+                  secondary="Just a reminder that you have an event today"
+                />
+              </MenuItem>
+              <Divider />
+              <MenuItem
+                onClick={handleNotificationMenuClose}
+                className={styles.MenuItem}
+              >
+                <Settings  className={styles.img} />
+                <ListItemText
+                  primary={<Trans>Settings</Trans>}
+                  secondary="Update Dashboard"
+                />
+              </MenuItem>
+              <Divider />
+              <MenuItem
+                onClick={handleNotificationMenuClose}
+                className={styles.MenuItem}
+              >
+                <Image src={face3} alt="user" className={styles.img} />
+                <ListItemText
+                  primary={<Trans>Launch Admin</Trans>}
+                  secondary="New admin now"
+                />
+              </MenuItem>
+              <Divider />
+
+              <Typography className={` ${styles.cursorPointer}`}>
+                {" "}
+                See all notifications
+              </Typography>
+            </Menu>
             <IconButton size="small" aria-label="Log Out" color="inherit">
               <PowerSettingsNewIcon fontSize="medium" />
             </IconButton>
@@ -416,7 +546,11 @@ const MiniDrawer: React.FC = () => {
                     justifyContent: open ? "initial" : "center",
                     px: 2.5,
                   }}
-                  onClick={() => handleClick(item.title)}
+                  onClick={() =>
+                    item.subMenu
+                      ? handleClick(item.title)
+                      : router.push(item.path)
+                  }
                 >
                   <ListItemText
                     primary={item.title}
@@ -451,8 +585,7 @@ const MiniDrawer: React.FC = () => {
                               justifyContent: open ? "initial" : "center",
                               px: 4,
                             }}
-                            component="a"
-                            href={subItem.path}
+                            onClick={() => handleSubItemClick(subItem.path)} // Use handleClick here
                           >
                             <ListItemText
                               primary={subItem.title}
@@ -477,5 +610,5 @@ const MiniDrawer: React.FC = () => {
       </Box>
     </>
   );
-}
+};
 export default MiniDrawer;

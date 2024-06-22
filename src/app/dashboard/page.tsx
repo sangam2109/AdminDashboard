@@ -23,14 +23,14 @@ import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import DiamondIcon from "@mui/icons-material/Diamond";
-import DashboardTable from "./dashboardTable";
+import DashboardTable from "../../components/Dashboard/dashboardTable";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import styles from "../../styles/dashboard.module.scss";
 import circleImage from "../../assets/images/circle.svg";
 import { defaultData } from "@/constant";
 import Image from "next/image";
-import RecentUpdates from "./dashboardUpdates";
-import DashboardCharts from "./dashboardCharts";
+import RecentUpdates from "../../components/Dashboard/dashboardUpdates";
+import DashboardCharts from "../../components/Dashboard/dashboardCharts";
 import Tstyles from "../../styles/dashboardTable.module.scss";
 
 const Dashboard: React.FC = () => {
@@ -181,7 +181,7 @@ const Dashboard: React.FC = () => {
                 Project Status
               </Typography>
               <table className={styles.table}>
-                <thead className={styles.heading}>
+                <thead className={styles.tableheading}>
                   <tr>
                     <td>#</td>
                     <td>Name</td>

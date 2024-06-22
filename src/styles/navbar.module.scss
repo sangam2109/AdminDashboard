@@ -49,7 +49,23 @@
     }
   }
 }
-
+.headingText{
+  font-style: var(--font-family);
+  font-weight: 700;
+  font-size: 15px;
+  margin-right: 8px;
+  padding: 1rem;
+}
+.MenuItem{
+  padding: 1rem;
+  font-family: var(--font-family);
+}
+.cursorPointer{
+  margin-bottom: 0;
+  text-align: center;
+  font-weight: 700;
+  padding: 0.7rem;
+}
 .menuList{
   margin-top: 20px;
 }

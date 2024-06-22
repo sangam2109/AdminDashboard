@@ -4,7 +4,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from "../theme";
 import  "../styles/global.scss";
 import MiniDrawer from "@/components/Navbar/navbar";
-import { Box } from "@mui/material";
+
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -21,13 +21,10 @@ export default function RootLayout({
       <body>
         <AppRouterCacheProvider options={{ key: "scss" }}>
           <ThemeProvider theme={theme}>
-            <Box
-              display={"flex"}
-              sx={{ paddingY: "100px", paddingX: 3 }}
-            >
+          
               <MiniDrawer />
-              {children}
-            </Box>
+           
+            {children}
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>
