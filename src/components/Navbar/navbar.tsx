@@ -20,7 +20,6 @@ import {
   ListItem,
   Menu,
   ListItemButton,
-  ListItemAvatar,
   ListItemIcon,
   ListItemText,
   Toolbar,
@@ -43,20 +42,19 @@ import {
   Home as HomeIcon,
   Mail as MailIcon,
   Inbox as InboxIcon,
-  ExpandLess,
-  ExpandMore,
-  Settings 
+  Settings,
+  CalendarMonth,
+   LinkOff,
 } from "@mui/icons-material";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useRouter } from "next/navigation";
 import MenuIcon from "@mui/icons-material/Menu";
-import Link from "next/link";
 import styles from "../../styles/navbar.module.scss";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 import FormatLineSpacingIcon from "@mui/icons-material/FormatLineSpacing";
 import Image from "next/image";
 import BasicUiIcon from "@mui/icons-material/GpsFixedSharp";
-import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import TableIcon from "@mui/icons-material/BackupTableSharp";
 import ContactsIcon from "@mui/icons-material/Contacts";
 import ChartBarIcon from "@mui/icons-material/Addchart";
@@ -64,6 +62,7 @@ import MedicalBagIcon from "@mui/icons-material/MedicalServices";
 import face2 from "../../assets/images/faces/face2.jpg";
 import face3 from "../../assets/images/faces/face3.jpg";
 import face4 from "../../assets/images/faces/face4.jpg";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 const drawerWidth = 240;
 
 const openedMixin = (theme: Theme): CSSObject => ({
@@ -143,48 +142,44 @@ const MenuItems = [
     title: "Basic UI Elements",
     icon: <BasicUiIcon />,
     path: "/basic-ui",
+    arrowIcon: 1,
     subMenu: [
-      { title: "Buttons", path: "/basic-ui/buttons" },
-      { title: "Dropdowns", path: "/basic-ui/dropdowns" },
-      { title: "Typography", path: "/basic-ui/typography" },
+      { icon: 1, title: "Buttons", path: "/basic-ui/buttons" },
+      { icon: 1, title: "Dropdowns", path: "/basic-ui/dropdowns" },
+      { icon: 1, title: "Typography", path: "/basic-ui/typography" },
     ],
   },
   {
     title: "Form Elements",
     icon: <MailIcon />,
-    path: "/form-elements",
-    subMenu: [
-      { title: "Basic Elements", path: "/form-elements/basic-elements" },
-    ],
+    path: "/form-elements/basic-elements",
   },
   {
     title: "Icons",
     icon: <ContactsIcon />,
-    path: "/icons",
-    subMenu: [{ title: "Material", path: "/icons/mdi" }],
+    path: "/icons/mdi",
   },
   {
     title: "Charts",
     icon: <ChartBarIcon />,
-    path: "/charts",
-    subMenu: [{ title: "Chart Js", path: "/charts/chart-js" }],
+    path: "/charts/chart-js",
   },
   {
     title: "Tables",
     icon: <TableIcon />,
-    path: "/tables",
-    subMenu: [{ title: "Basic Table", path: "/tables/basic-table" }],
+    path: "/tables/basic-table",
   },
   {
     title: "Sample Pages",
     icon: <MedicalBagIcon />,
     path: "/sample-pages",
+    arrowIcon: 1,
     subMenu: [
-      { title: "Login", path: "/user-pages/login" },
-      { title: "Register", path: "/user-pages/register" },
-      { title: "404", path: "/error-pages/error-404" },
-      { title: "500", path: "/error-pages/error-500" },
-      { title: "Blank Page", path: "/general-pages/blank-page" },
+      { icon: 1, title: "Login", path: "/user-pages/login" },
+      { icon: 1, title: "Register", path: "/user-pages/register" },
+      { icon: 1, title: "404", path: "/error-pages/error-404" },
+      { icon: 1, title: "500", path: "/error-pages/error-500" },
+      { icon: 1, title: "Blank Page", path: "/general-pages/blank-page" },
     ],
   },
   // {
@@ -200,6 +195,7 @@ const MiniDrawer: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [menuState, setMenuState] = useState<{ [key: string]: boolean }>({});
   const [isExpanded, setIsExpanded] = React.useState(false);
+  const [activeItem, setActiveItem] = React.useState<string | null>(null);(null);
   const [anchorElProfile, setAnchorElProfile] = useState<null | HTMLElement>(
     null
   );
@@ -218,8 +214,13 @@ const MiniDrawer: React.FC = () => {
     setIsExpanded(!isExpanded);
   };
   const handleClick = (title: string) => {
+    
     setMenuState({ ...menuState, [title]: !menuState[title] });
+    
   };
+    const handleClickItem = (title: string) => {
+      setActiveItem(title)
+    };
 
   const handleSubItemClick = (path: string) => {
     router.push(path);
@@ -481,7 +482,12 @@ const MiniDrawer: React.FC = () => {
                 onClick={handleNotificationMenuClose}
                 className={styles.MenuItem}
               >
-                <Image src={face4} alt="user" className={styles.img} />
+               
+                  <CalendarMonth
+                    className={styles.iconCalendar }
+                    
+                  />
+                
                 <ListItemText
                   primary={<Trans>Event today</Trans>}
                   secondary="Just a reminder that you have an event today"
@@ -492,7 +498,7 @@ const MiniDrawer: React.FC = () => {
                 onClick={handleNotificationMenuClose}
                 className={styles.MenuItem}
               >
-                <Settings  className={styles.img} />
+                <Settings className={`${styles.img} ${styles.iconSetting}`} />
                 <ListItemText
                   primary={<Trans>Settings</Trans>}
                   secondary="Update Dashboard"
@@ -503,7 +509,7 @@ const MiniDrawer: React.FC = () => {
                 onClick={handleNotificationMenuClose}
                 className={styles.MenuItem}
               >
-                <Image src={face3} alt="user" className={styles.img} />
+                <LinkOff className={`${styles.img} ${styles.iconLink}`} />
                 <ListItemText
                   primary={<Trans>Launch Admin</Trans>}
                   secondary="New admin now"
@@ -537,8 +543,13 @@ const MiniDrawer: React.FC = () => {
             <React.Fragment key={item.title}>
               <ListItem
                 disablePadding
-                sx={{ display: "block" }}
-                className={styles.menuList}
+                sx={{
+                  display: "block",
+                }}
+                onClick={() => handleClickItem(item.title)}
+                className={`${styles.menuList} ${
+                  activeItem === item.title ? styles.activeItem : ""
+                }`}
               >
                 <ListItemButton
                   sx={{
@@ -551,11 +562,23 @@ const MiniDrawer: React.FC = () => {
                       ? handleClick(item.title)
                       : router.push(item.path)
                   }
+                  className={styles.MenuBar}
                 >
                   <ListItemText
                     primary={item.title}
                     sx={{ opacity: open ? 1 : 0 }}
-                  />
+                  ></ListItemText>
+
+                  {item.arrowIcon === 1 && (
+                    <ArrowBackIosNewIcon
+                      sx={{
+                        opacity: open ? 1 : 0,
+                        fontSize: "0.8rem",
+                        top: "50%",
+                        color: "#a2a2a2",
+                      }}
+                    />
+                  )}
                   <ListItemIcon
                     sx={{
                       minWidth: 0,
@@ -584,13 +607,22 @@ const MiniDrawer: React.FC = () => {
                               minHeight: 48,
                               justifyContent: open ? "initial" : "center",
                               px: 4,
+                              fontWeight: 300,
                             }}
-                            onClick={() => handleSubItemClick(subItem.path)} // Use handleClick here
+                            onClick={() => handleSubItemClick(subItem.path)}
+                            // Use handleClick here
                           >
-                            <ListItemText
-                              primary={subItem.title}
-                              sx={{ opacity: open ? 1 : 0 }}
-                            />
+                            <ListItemText sx={{ opacity: open ? 1 : 0 }}>
+                              <Typography className={styles.SubMenuItem}>
+                                {subItem.icon === 1 ? (
+                                  <ArrowForwardIcon
+                                    className={styles.ArrowIcon}
+                                    sx={{ fontSize: "1rem" }}
+                                  />
+                                ) : null}
+                                {subItem.title}
+                              </Typography>
+                            </ListItemText>
                           </ListItemButton>
                         </ListItem>
                       ))}

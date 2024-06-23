@@ -3,7 +3,6 @@ import { Doughnut, Bar } from "react-chartjs-2";
 import { Grid, Typography } from "@mui/material";
 import styles from "../../styles/dashboardCharts.module.scss"; // Adjust path as necessary
 import { Chart, registerables } from "chart.js"; 
-import { AspectRatio } from "@mui/icons-material";
 Chart.register(...registerables);
 const DashboardCharts: React.FC = () => {
   const [visitSaleData, setVisitSaleData] = useState<any>({});

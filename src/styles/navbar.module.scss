@@ -1,12 +1,15 @@
+@mixin img-styles {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50% !important;
+  margin-right: 10px;
+}
 .navbar{
   padding: 0.325rem;
 }
 
 .img {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  margin-right: 10px;
+@include img-styles;
 }
 .ProfileIcon{
   margin-right: 10px;
@@ -60,6 +63,30 @@
   padding: 1rem;
   font-family: var(--font-family);
 }
+.SubMenuItem{
+color: #888;
+    padding: 0em 2rem 0rem 2rem;
+    position: relative;
+    font-size: 0.5rem;
+    line-height: 1;
+    height: auto;
+    border-top: 0;
+}
+.ArrowIcon{
+ 
+    display: block;
+    position: absolute;
+    left: 0px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    color: #a2a2a2;
+}
+
+.activeItem{
+  color: var(--primary-color);
+  
+}
 .cursorPointer{
   margin-bottom: 0;
   text-align: center;
@@ -87,6 +114,24 @@ background: #1bcfb4;
 }
 .IconStyle{
   gap: 10px;
+}
+.iconSetting{
+@include img-styles;
+background-color: var(--warning-color);
+color: white;
+padding: .4rem;
+}
+.iconCalendar{
+  @include img-styles;
+background-color: var(--success-color);
+color: white;
+padding: .4rem;
+}
+.iconLink{
+  @include img-styles;
+  background-color: var(--info-color);
+color: white;
+padding: .4rem;
 }
 .Menu{
   margin-top: 45px;

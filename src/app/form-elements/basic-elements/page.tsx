@@ -98,7 +98,7 @@ const Forms: React.FC = () => {
                       size="small"
                     />
                   </FormControl>
-                  <FormGroup>
+                  <FormGroup >
                     <Checkbox id="rememberMe" />
                     <FormLabel htmlFor="rememberMe">Remember me</FormLabel>
                   </FormGroup>
